@@ -1,5 +1,6 @@
 /backend-server/node_modules
 /backend-server/migrations
 /backend-server/seeders
+/backend-server/.DS_Store
 # /backend-server/.env
 # /backend-server/config
