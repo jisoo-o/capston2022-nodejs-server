@@ -26,7 +26,7 @@ app.use(express.json());
 
 app.use('/', authRouter);
 app.use('/', postRouter);
-// app.use('/', searchRouter);
+app.use('/', searchRouter);
 
 app.get('/test' , (req, res) => {
   return res.json(req.decoded.email);
