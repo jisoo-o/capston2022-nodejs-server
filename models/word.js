@@ -1,4 +1,7 @@
 const Sequelize = require('sequelize');
+// const Search = require('./search');
+
+
 
 module.exports = class Word extends Sequelize.Model {
   static init(sequelize) {
@@ -16,30 +19,32 @@ module.exports = class Word extends Sequelize.Model {
         type: Sequelize.STRING(40),
         allowNull: false,
       },
-      // password: {
-      //   type: Sequelize.STRING(100),
-      //   allowNull: true,
-      // },
-      // provider: {
-      //   type: Sequelize.STRING(10),
-      //   allowNull: false,
-      //   defaultValue: 'local',
-      // },
-      // snsId: {
-      //   type: Sequelize.STRING(30),
-      //   allowNull: true,
-      // },
     }, {
       sequelize,
-      timestamps: true,
+      timestamps: false,
       underscored: false,
-      modelName: 'User',
-      tableName: 'users',
-      paranoid: true,
+      modelName: 'Word',
+      tableName: 'words',
+      paranoid: false,
       charset: 'utf8',
       collate: 'utf8_general_ci',
     });
   }
 
-  static associate(db) { }
+  static associate(db) {
+    const Search = db.sequelize.define('search', {
+      count: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1
+      } 
+      }, { 
+        timestamps: true,
+        modelName: 'Search',
+        tableName: 'search',
+      }
+    );
+
+    db.Word.belongsToMany(db.User, {through: 'search'});
+  }
 };

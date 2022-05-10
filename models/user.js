@@ -12,30 +12,19 @@ module.exports = class User extends Sequelize.Model {
         type: Sequelize.STRING(15),
         allowNull: true,
       },
-      // password: {
-      //   type: Sequelize.STRING(100),
-      //   allowNull: true,
-      // },
-      // provider: {
-      //   type: Sequelize.STRING(10),
-      //   allowNull: false,
-      //   defaultValue: 'local',
-      // },
-      // snsId: {
-      //   type: Sequelize.STRING(30),
-      //   allowNull: true,
-      // },
     }, {
       sequelize,
       timestamps: true,
       underscored: false,
       modelName: 'User',
       tableName: 'users',
-      paranoid: true,
+      paranoid: false,
       charset: 'utf8',
       collate: 'utf8_general_ci',
     });
   }
 
-  static associate(db) { }
+  static associate(db) {
+    db.User.belongsToMany(db.Word, {through: 'search'});
+   }
 };

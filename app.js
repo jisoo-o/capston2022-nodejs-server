@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
+const searchRouter = require('./routes/search');
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use(express.json());
 
 app.use('/', authRouter);
 app.use('/', postRouter);
+// app.use('/', searchRouter);
 
 app.get('/test' , (req, res) => {
   return res.json(req.decoded.email);
