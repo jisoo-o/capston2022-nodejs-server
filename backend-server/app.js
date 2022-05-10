@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const authRouter = require('./routes/auth');
+const registerRouter = require('./routes/post');
 
 const { verifyToken } = require('./routes/middlewares');
 
@@ -25,6 +26,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/', authRouter);
+app.use('/', registerRouter);
 
 // app.get('/test' , (req, res) => {
 //   return res.json("hi");
