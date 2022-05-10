@@ -1,17 +1,11 @@
 # mobile-jwt-login
 
-at backend-server directory
 
-make .env file
+1. npm init
 
-ex)
-JWT_SECRET = 'jwtsecret'
+2. npx sequelize init
 
-npm init
-
-npx sequelize init
-
-fill out config/config.json 
+3. fill out config/config.json 
 
 ex)
 
@@ -23,4 +17,4 @@ ex)
     "dialect": "mysql"
   },
 
-npx sequelize db:create
+4. npx sequelize db:create

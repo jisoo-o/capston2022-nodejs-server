@@ -34,4 +34,29 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+
+router.get('/delete', async (req, res, next) => {
+  const { email } = req.body;
+  try {
+    if (!email) {
+      return res.status(401).json({
+        message: 'blanks are not allowed',
+      });
+    }
+
+
+    const result = await User.destroy({ where: { email : email } });
+    if (result) {
+      return res.status(200).json({
+        message: 'delete user'
+      });
+    }
+
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+
+
 module.exports = router;

@@ -15,7 +15,7 @@ router.post('/post/nickname', async (req, res, next) => {
     }
 
     try {
-      const result = await User.update({
+      await User.update({
         nick: nick,
       }, {
         where: { email: email },
