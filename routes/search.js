@@ -2,7 +2,8 @@ const express = require('express');
 
 const User = require('../models/user');
 const Word = require('../models/word');
-const db = require
+const db = require('../models/index');
+
 const router = express.Router();
 
 
@@ -17,13 +18,35 @@ router.get('/search/word', async (req, res, next) => {
 
     try {
       const exWord = await Word.findOne({ where: { word }});
+      const exUser = await db.User.findOne({where :{email}});
 
-      if (exWord) {
+      if (exWord && exUser) {
+        // incease search log count
+        
+        try {
+          const [row, created] = await db.sequelize.models.search.findOrCreate({ 
+            where : { WordId : exWord.id , UserId : exUser.id }
+          });
+          
+          if (!created) {
+            await db.sequelize.models.search.update({
+              count: row.count + 1,
+            }, {
+              where: { WordId : exWord.id , UserId : exUser.id },
+            });
+          }
+        } catch (err) {
+          return res.status(401).json({
+            message: 'register log failed'
+          });
+        }
+
         return res.status(200).json({
           word : exWord.word,
           meaning: exWord.meaning,
-          path : exWord.path
+          path : exWord.path,
         });
+
       } else {
         return res.status(401).json({
           message: 'word doesn\'t exist'
