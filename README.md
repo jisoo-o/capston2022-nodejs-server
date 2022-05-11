@@ -1,11 +1,11 @@
 # mobile-jwt-login
 
 
-1. npm init
+1. npm install
 
-2. npx sequelize init
+2. npx sequelize init // 안해도 됨
 
-3. fill out config/config.json 
+3. fill out config/config.json  // 내 user id, password 설정
 
 ex)
 
@@ -18,3 +18,5 @@ ex)
   },
 
 4. npx sequelize db:create
+
+5. npm start
