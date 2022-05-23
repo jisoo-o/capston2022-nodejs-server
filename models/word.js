@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
-// const Search = require('./search');
-
-
+const Search = require('./search');
 
 module.exports = class Word extends Sequelize.Model {
   static init(sequelize) {
@@ -32,19 +30,6 @@ module.exports = class Word extends Sequelize.Model {
   }
 
   static associate(db) {
-    const Search = db.sequelize.define('search', {
-      count: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 1
-      } 
-      }, { 
-        timestamps: true,
-        modelName: 'Search',
-        tableName: 'search',
-      }
-    );
-
-    db.Word.belongsToMany(db.User, {through: 'search'});
+    db.Word.belongsToMany(db.User, {through: Search});
   }
 };

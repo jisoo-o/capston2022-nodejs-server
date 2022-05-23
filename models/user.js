@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
+const Search = require('./search');
+
 
 module.exports = class User extends Sequelize.Model {
   static init(sequelize) {
@@ -25,6 +27,6 @@ module.exports = class User extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.User.belongsToMany(db.Word, {through: 'search'});
+    db.User.belongsToMany(db.Word, {through: Search});
    }
 };
