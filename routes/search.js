@@ -8,7 +8,7 @@ const db = require('../models/index');
 const router = express.Router();
 
 
-router.get('/search/word', async (req, res, next) => {
+router.post('/search/word', async (req, res, next) => {
   const { email, word } = req.body;
   try {
     if (!email || !word) {
@@ -71,7 +71,7 @@ router.get('/search/word', async (req, res, next) => {
 });
 
 
-router.get('/search/record', async (req, res, next) => {
+router.post('/search/record', async (req, res, next) => {
   const { email } = req.body;
   try {
     if (!email) {
