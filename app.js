@@ -29,7 +29,9 @@ app.use('/', postRouter);
 app.use('/', searchRouter);
 
 app.get('/test' , (req, res) => {
-  return res.json(req.decoded.email);
+  return res.status(200).json({
+    message: 'post nickname succeess'
+  });
 });
 
 app.use((req, res, next) => {
